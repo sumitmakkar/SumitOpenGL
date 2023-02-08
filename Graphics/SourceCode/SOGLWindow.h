@@ -14,6 +14,7 @@ class SOGLWindow
 
 		int			 m_WindowWidth;
 		int			 m_WindowHeight;
+		
 
 	public:
 		SOGLWindow(int argc, char* argv[], std::string windowTitleString = "OpenGlWindow");
