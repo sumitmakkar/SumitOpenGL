@@ -4,6 +4,7 @@
 #include "FreeGlut\freeglut.h"
 #include <iostream>
 #include <string>
+#include "SumitOGLMaths.h"
 
 class SOGLWindow
 {
@@ -14,11 +15,11 @@ class SOGLWindow
 
 		int			 m_WindowWidth;
 		int			 m_WindowHeight;
-		
+		Vector4f	 m_WindowBackgroundColour;
 
 	public:
-		SOGLWindow(int argc, char* argv[], std::string windowTitleString = "OpenGlWindow");
-		SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoordinate, int windowStartingYCoordinate, int argc, char* argv[], std::string windowTitleString = "OpenGlWindow");
+		SOGLWindow(int argc, char* argv[], Vector4f windowBackgroundColour, std::string windowTitleString = "OpenGlWindow");
+		SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoordinate, int windowStartingYCoordinate, int argc, char* argv[], Vector4f windowBackgroundColour, std::string windowTitleString = "OpenGlWindow");
 		~SOGLWindow();
 
 	private:
