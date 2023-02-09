@@ -1,6 +1,6 @@
 #pragma once
 
-#include "OpenGLDevelopmentKit\ogldev_math_3d.h"
+#include "SumitOGLMaths.h"
 
 struct Vertex
 {

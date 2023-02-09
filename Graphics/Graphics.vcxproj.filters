@@ -21,12 +21,24 @@
     <ClInclude Include="SourceCode\SShadersBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\SMeshBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\SWorldTransform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\SOGLWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\SShadersBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\SMeshBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\SWorldTransform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

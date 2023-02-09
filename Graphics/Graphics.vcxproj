@@ -187,12 +187,16 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\SMeshBase.h" />
     <ClInclude Include="SourceCode\SOGLWindow.h" />
     <ClInclude Include="SourceCode\SShadersBase.h" />
+    <ClInclude Include="SourceCode\SWorldTransform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\SMeshBase.cpp" />
     <ClCompile Include="SourceCode\SOGLWindow.cpp" />
     <ClCompile Include="SourceCode\SShadersBase.cpp" />
+    <ClCompile Include="SourceCode\SWorldTransform.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
