@@ -1,6 +1,6 @@
 #include <iostream>
-#include "SOGLWindow.h"
-#include "SumitOGLMaths.h"
+#include <SOGLWindow.h>
+#include <SumitOGLMaths.h>
 
 int main(int argc, char* argv[])
 {

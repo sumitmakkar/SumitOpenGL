@@ -4,7 +4,7 @@
 #include "FreeGlut\freeglut.h"
 #include <iostream>
 #include <string>
-#include "SumitOGLMaths.h"
+#include <SumitOGLMaths.h>
 
 class SOGLWindow
 {

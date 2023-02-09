@@ -18,9 +18,15 @@
     <ClInclude Include="SourceCode\SOGLWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\SShadersBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\SOGLWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\SShadersBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
