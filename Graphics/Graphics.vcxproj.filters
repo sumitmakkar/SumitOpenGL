@@ -47,5 +47,8 @@
     <ClCompile Include="SourceCode\SCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\SumitOGLMaths.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

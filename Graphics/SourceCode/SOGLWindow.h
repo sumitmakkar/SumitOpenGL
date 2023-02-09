@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <SumitOGLMaths.h>
+#include "SCamera.h"
 
 class SOGLWindow
 {
@@ -17,9 +18,11 @@ class SOGLWindow
 		int			 m_WindowHeight;
 		Vector4f	 m_WindowBackgroundColour;
 
+		SCamera*	 m_Camera = NULL;
+
 	public:
 		SOGLWindow(int argc, char* argv[], Vector4f windowBackgroundColour, std::string windowTitleString = "OpenGlWindow");
-		SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoordinate, int windowStartingYCoordinate, int argc, char* argv[], Vector4f windowBackgroundColour, std::string windowTitleString = "OpenGlWindow");
+		SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoordinate, int windowStartingYCoordinate, int argc, char* argv[], Vector4f windowBackgroundColour, SCamera* camera, std::string windowTitleString = "OpenGlWindow");
 		~SOGLWindow();
 		//void SetRenderer();
 
@@ -30,5 +33,8 @@ class SOGLWindow
 		void SetWindowBackgroundColour();
 		void EnableWindowParameters();
 		void InitializeGlutCallbacks();
+		// Static Functions
 		static void RenderSceneCB();
+		static void KeyboardCB(unsigned char key, int mouse_x, int mouse_y);
+		static void SpecialKeyboardCB(int key, int mouse_x, int mouse_y);
 };

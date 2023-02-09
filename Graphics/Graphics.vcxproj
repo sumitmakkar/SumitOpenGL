@@ -198,6 +198,7 @@
     <ClCompile Include="SourceCode\SMeshBase.cpp" />
     <ClCompile Include="SourceCode\SOGLWindow.cpp" />
     <ClCompile Include="SourceCode\SShadersBase.cpp" />
+    <ClCompile Include="SourceCode\SumitOGLMaths.cpp" />
     <ClCompile Include="SourceCode\SWorldTransform.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
