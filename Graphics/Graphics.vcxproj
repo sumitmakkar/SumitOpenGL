@@ -192,6 +192,7 @@
     <ClInclude Include="SourceCode\SOGLWindow.h" />
     <ClInclude Include="SourceCode\SShadersBase.h" />
     <ClInclude Include="SourceCode\SWorldTransform.h" />
+    <ClInclude Include="SourceCode\SRendererBase.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\SCamera.cpp" />
@@ -200,6 +201,7 @@
     <ClCompile Include="SourceCode\SShadersBase.cpp" />
     <ClCompile Include="SourceCode\SumitOGLMaths.cpp" />
     <ClCompile Include="SourceCode\SWorldTransform.cpp" />
+    <ClCompile Include="SourceCode\SRendererBase.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

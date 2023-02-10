@@ -2,7 +2,7 @@
 
 SOGLWindow* selfReference;
 
-SOGLWindow::SOGLWindow(int argc, char* argv[], Vector4f windowBackgroundColour, std::string windowTitleString): m_WindowBackgroundColour(windowBackgroundColour)
+SOGLWindow::SOGLWindow(int argc, char* argv[], Vector4f windowBackgroundColour, SRendererBase* renderer, std::string windowTitleString): m_WindowBackgroundColour(windowBackgroundColour), m_renderer(renderer)
 {
 	m_WindowWidth				= 1920;
 	m_WindowHeight				= 1080;
@@ -17,7 +17,7 @@ SOGLWindow::SOGLWindow(int argc, char* argv[], Vector4f windowBackgroundColour, 
 	CreateOpenGLWindow(argc, argv);
 }
 
-SOGLWindow::SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoordinate, int windowStartingYCoordinate, int argc, char* argv[], Vector4f windowBackgroundColour, SCamera* camera, std::string windowTitleString): m_WindowBackgroundColour(windowBackgroundColour), m_Camera(camera)
+SOGLWindow::SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoordinate, int windowStartingYCoordinate, int argc, char* argv[], Vector4f windowBackgroundColour, SCamera* camera, SRendererBase* renderer, std::string windowTitleString): m_WindowBackgroundColour(windowBackgroundColour), m_Camera(camera), m_renderer(renderer)
 {
 	//m_SelfReference = this;
 	m_WindowWidth				= windowWidth;
@@ -121,6 +121,8 @@ void SOGLWindow::InitializeGlutCallbacks()
 void SOGLWindow::RenderSceneCB()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	selfReference->m_renderer->RenderScene();
 
 	glutPostRedisplay();	//For calling this function multiple times
 
