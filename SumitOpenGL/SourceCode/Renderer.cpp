@@ -10,13 +10,14 @@ Renderer::Renderer(int windowWidth, int windowHeight)
 	m_WindowWidth  = windowWidth;
 	m_WindowHeight = windowHeight;
 	m_PersProjInfo = { m_fov, (float)m_WindowWidth, (float)m_WindowHeight, m_ZNear, m_ZFar };
+	InitializeShaderAndObjects();
 }
 
 Renderer::~Renderer()
 {
 }
 
-void Renderer::InitShaders()
+void Renderer::InitializeShaderAndObjects()
 {
 	std::vector<std::string> uniformNamesVector = { "gWorldViewProjection" };
 	m_BasicShader								= SShadersBase(m_VSFileName, m_FSFileName, uniformNamesVector);

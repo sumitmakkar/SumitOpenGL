@@ -25,9 +25,11 @@ class Renderer : public SRendererBase
 	public:
 		Renderer(int windowWidth = 1600, int windowHeight = 800);
 		~Renderer();
-		void InitShaders();
 		void RenderScene() override;
 		void UpdateScene(float dt) override;
 		void HandleMouseAndKeyboardEvents(unsigned char key, int mouse_x, int mouse_y) override;
 		void HandleMoouseAndKeyboardSpecialEvents(int key, int mouse_x, int mouse_y) override;
+
+	private:
+		void InitializeShaderAndObjects();
 };

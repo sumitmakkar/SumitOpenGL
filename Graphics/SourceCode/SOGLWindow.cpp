@@ -2,7 +2,7 @@
 
 SOGLWindow* selfReference;
 
-SOGLWindow::SOGLWindow(int argc, char* argv[], Vector4f windowBackgroundColour, SRendererBase* renderer, std::string windowTitleString): m_WindowBackgroundColour(windowBackgroundColour), m_renderer(renderer)
+SOGLWindow::SOGLWindow(int argc, char* argv[], Vector4f windowBackgroundColour, std::string windowTitleString): m_WindowBackgroundColour(windowBackgroundColour)
 {
 	m_WindowWidth				= 1920;
 	m_WindowHeight				= 1080;
@@ -12,7 +12,7 @@ SOGLWindow::SOGLWindow(int argc, char* argv[], Vector4f windowBackgroundColour, 
 	CreateOpenGLWindow(argc, argv);
 }
 
-SOGLWindow::SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoordinate, int windowStartingYCoordinate, int argc, char* argv[], Vector4f windowBackgroundColour, SRendererBase* renderer, std::string windowTitleString): m_WindowBackgroundColour(windowBackgroundColour), m_renderer(renderer)
+SOGLWindow::SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoordinate, int windowStartingYCoordinate, int argc, char* argv[], Vector4f windowBackgroundColour, std::string windowTitleString): m_WindowBackgroundColour(windowBackgroundColour)
 {
 	m_WindowWidth				= windowWidth;
 	m_WindowHeight				= windowHeight;
@@ -105,6 +105,11 @@ void SOGLWindow::UpdateFrame()
 	glutKeyboardFunc(KeyboardCB);
 	glutSpecialFunc(SpecialKeyboardCB);
 	glutMainLoop();
+}
+
+void SOGLWindow::UpdateRenderer(SRendererBase* renderer)
+{
+	m_renderer = renderer;
 }
 
 void SOGLWindow::RenderSceneCB()
