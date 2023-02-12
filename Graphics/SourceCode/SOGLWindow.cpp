@@ -99,7 +99,7 @@ void SOGLWindow::EnableWindowParameters()
 	glEnable(GL_DEPTH_TEST);
 }
 
-void SOGLWindow::Update()
+void SOGLWindow::UpdateFrame()
 {
 	glutDisplayFunc(RenderSceneCB);
 	glutKeyboardFunc(KeyboardCB);

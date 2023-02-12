@@ -25,7 +25,7 @@ class SOGLWindow
 		SOGLWindow(int argc, char* argv[], Vector4f windowBackgroundColour, SRendererBase* renderer, std::string windowTitleString = "OpenGlWindow");
 		SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoordinate, int windowStartingYCoordinate, int argc, char* argv[], Vector4f windowBackgroundColour, SRendererBase* renderer, std::string windowTitleString = "OpenGlWindow");
 		~SOGLWindow();
-		void Update();
+		void UpdateFrame();
 
 	private:
 		void CreateOpenGLWindow(int argc, char* argv[]);
