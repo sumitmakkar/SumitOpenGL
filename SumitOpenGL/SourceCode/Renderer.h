@@ -9,8 +9,8 @@ class Renderer : public SRendererBase
 {
 	private:
 		SShadersBase m_BasicShader;
-		const char*  m_VSFileName = "Shader.vs";
-		const char*  m_FSFileName = "Shader.fs";
+		const char*  m_VSFileName = "Shaders/Shader.vs";
+		const char*  m_FSFileName = "Shaders/Shader.fs";
 		BasicCube*   m_Cube;
 		SCamera		 m_GameCamera;
 		PersProjInfo m_PersProjInfo;
