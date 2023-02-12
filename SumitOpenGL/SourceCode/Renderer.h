@@ -9,8 +9,8 @@ class Renderer : public SRendererBase
 {
 	private:
 		SShadersBase m_BasicShader;
-		const char*  m_VSFileName = "Shader.vs";
-		const char*  m_FSFileName = "Shader.fs";
+		const char*  m_VSFileName = "Shaders/Shader.vs";
+		const char*  m_FSFileName = "Shaders/Shader.fs";
 		BasicCube*   m_Cube;
 		SCamera		 m_GameCamera;
 		PersProjInfo m_PersProjInfo;
@@ -25,9 +25,11 @@ class Renderer : public SRendererBase
 	public:
 		Renderer(int windowWidth = 1600, int windowHeight = 800);
 		~Renderer();
-		void InitShaders();
 		void RenderScene() override;
 		void UpdateScene(float dt) override;
 		void HandleMouseAndKeyboardEvents(unsigned char key, int mouse_x, int mouse_y) override;
 		void HandleMoouseAndKeyboardSpecialEvents(int key, int mouse_x, int mouse_y) override;
+
+	private:
+		void InitializeShaderAndObjects();
 };

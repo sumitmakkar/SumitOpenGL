@@ -6,20 +6,22 @@ Renderer::Renderer(int windowWidth, int windowHeight)
 {
 	m_fov		   = 45.0f;
 	m_ZNear		   = 1.0f;
-	m_ZFar		   = 10.0f;
+	m_ZFar		   = 100.0f;
 	m_WindowWidth  = windowWidth;
 	m_WindowHeight = windowHeight;
 	m_PersProjInfo = { m_fov, (float)m_WindowWidth, (float)m_WindowHeight, m_ZNear, m_ZFar };
+	InitializeShaderAndObjects();
 }
 
 Renderer::~Renderer()
 {
 }
 
-void Renderer::InitShaders()
+void Renderer::InitializeShaderAndObjects()
 {
-	m_BasicShader = SShadersBase(m_VSFileName, m_FSFileName);
-	m_Cube = new BasicCube();
+	std::vector<std::string> uniformNamesVector = { "gWorldViewProjection" };
+	m_BasicShader								= SShadersBase(m_VSFileName, m_FSFileName, uniformNamesVector);
+	m_Cube										= new BasicCube();
 }
 
 void Renderer::RenderScene()

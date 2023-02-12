@@ -2,32 +2,23 @@
 
 SOGLWindow* selfReference;
 
-SOGLWindow::SOGLWindow(int argc, char* argv[], Vector4f windowBackgroundColour, SRendererBase* renderer, std::string windowTitleString): m_WindowBackgroundColour(windowBackgroundColour), m_renderer(renderer)
+SOGLWindow::SOGLWindow(int argc, char* argv[], Vector4f windowBackgroundColour, std::string windowTitleString): m_WindowBackgroundColour(windowBackgroundColour)
 {
 	m_WindowWidth				= 1920;
 	m_WindowHeight				= 1080;
 	m_WindowStartingXCoordinate = 0;
 	m_WindowStartingYCoordinate = 0;
 	m_WindowTitleString			= windowTitleString;
-	//m_Camera					= new SCamera();
-	/*m_fov = 45.0f;
-	m_zNear = 1.0f;
-	m_zFar = 100.0f;
-	m_perspectiveProjectionInfo = { m_fov, (float)m_WindowWidth, (float)m_WindowHeight, m_zNear, m_zFar };*/
 	CreateOpenGLWindow(argc, argv);
 }
 
-SOGLWindow::SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoordinate, int windowStartingYCoordinate, int argc, char* argv[], Vector4f windowBackgroundColour, SRendererBase* renderer, std::string windowTitleString): m_WindowBackgroundColour(windowBackgroundColour), m_renderer(renderer)
+SOGLWindow::SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoordinate, int windowStartingYCoordinate, int argc, char* argv[], Vector4f windowBackgroundColour, std::string windowTitleString): m_WindowBackgroundColour(windowBackgroundColour)
 {
 	m_WindowWidth				= windowWidth;
 	m_WindowHeight				= windowHeight;
 	m_WindowStartingXCoordinate = windowStartingXCoordinate;
 	m_WindowStartingYCoordinate = windowStartingYCoordinate;
 	m_WindowTitleString			= windowTitleString;
-	/*m_fov = 45.0f;
-	m_zNear = 1.0f;
-	m_zFar = 100.0f;
-	m_perspectiveProjectionInfo = { m_fov, (float)m_WindowWidth, (float)m_WindowHeight, m_zNear, m_zFar };*/
 	CreateOpenGLWindow(argc, argv);
 }
 
@@ -56,8 +47,6 @@ void SOGLWindow::CreateOpenGLWindow(int argc, char* argv[])
 		selfReference = this;
 		SetWindowBackgroundColour();
 		EnableWindowParameters();
-		InitializeGlutCallbacks();
-		//glutMainLoop();
 	}
 }
 
@@ -110,19 +99,17 @@ void SOGLWindow::EnableWindowParameters()
 	glEnable(GL_DEPTH_TEST);
 }
 
-void SOGLWindow::InitializeGlutCallbacks()
-{
-	//glutDisplayFunc(RenderSceneCB);
-	/*glutKeyboardFunc(KeyboardCB);
-	glutSpecialFunc(SpecialKeyboardCB);*/
-}
-
-void SOGLWindow::Update()
+void SOGLWindow::UpdateFrame()
 {
 	glutDisplayFunc(RenderSceneCB);
 	glutKeyboardFunc(KeyboardCB);
 	glutSpecialFunc(SpecialKeyboardCB);
 	glutMainLoop();
+}
+
+void SOGLWindow::UpdateRenderer(SRendererBase* renderer)
+{
+	m_renderer = renderer;
 }
 
 void SOGLWindow::RenderSceneCB()
