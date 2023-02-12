@@ -20,7 +20,7 @@ void Renderer::InitShaders()
 {
 	std::vector<std::string> uniformNamesVector = { "gWorldViewProjection" };
 	m_BasicShader = SShadersBase(m_VSFileName, m_FSFileName, uniformNamesVector);
-	m_Cube = new BasicCube();
+	m_Cube	      = new BasicCube();
 }
 
 void Renderer::RenderScene()
