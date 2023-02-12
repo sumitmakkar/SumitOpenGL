@@ -25,7 +25,6 @@ class SOGLWindow
 		SOGLWindow(int argc, char* argv[], Vector4f windowBackgroundColour, SRendererBase* renderer, std::string windowTitleString = "OpenGlWindow");
 		SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoordinate, int windowStartingYCoordinate, int argc, char* argv[], Vector4f windowBackgroundColour, SRendererBase* renderer, std::string windowTitleString = "OpenGlWindow");
 		~SOGLWindow();
-		//void SetRenderer();
 		void Update();
 
 	private:
@@ -34,7 +33,6 @@ class SOGLWindow
 		bool InitializeGlew();
 		void SetWindowBackgroundColour();
 		void EnableWindowParameters();
-		void InitializeGlutCallbacks();
 		// Static Functions
 		static void RenderSceneCB();
 		static void KeyboardCB(unsigned char key, int mouse_x, int mouse_y);

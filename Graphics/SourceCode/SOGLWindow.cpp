@@ -9,11 +9,6 @@ SOGLWindow::SOGLWindow(int argc, char* argv[], Vector4f windowBackgroundColour, 
 	m_WindowStartingXCoordinate = 0;
 	m_WindowStartingYCoordinate = 0;
 	m_WindowTitleString			= windowTitleString;
-	//m_Camera					= new SCamera();
-	/*m_fov = 45.0f;
-	m_zNear = 1.0f;
-	m_zFar = 100.0f;
-	m_perspectiveProjectionInfo = { m_fov, (float)m_WindowWidth, (float)m_WindowHeight, m_zNear, m_zFar };*/
 	CreateOpenGLWindow(argc, argv);
 }
 
@@ -24,10 +19,6 @@ SOGLWindow::SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoo
 	m_WindowStartingXCoordinate = windowStartingXCoordinate;
 	m_WindowStartingYCoordinate = windowStartingYCoordinate;
 	m_WindowTitleString			= windowTitleString;
-	/*m_fov = 45.0f;
-	m_zNear = 1.0f;
-	m_zFar = 100.0f;
-	m_perspectiveProjectionInfo = { m_fov, (float)m_WindowWidth, (float)m_WindowHeight, m_zNear, m_zFar };*/
 	CreateOpenGLWindow(argc, argv);
 }
 
@@ -56,8 +47,6 @@ void SOGLWindow::CreateOpenGLWindow(int argc, char* argv[])
 		selfReference = this;
 		SetWindowBackgroundColour();
 		EnableWindowParameters();
-		InitializeGlutCallbacks();
-		//glutMainLoop();
 	}
 }
 
@@ -108,13 +97,6 @@ void SOGLWindow::EnableWindowParameters()
 	glFrontFace(GL_CW);
 	glCullFace(GL_BACK);
 	glEnable(GL_DEPTH_TEST);
-}
-
-void SOGLWindow::InitializeGlutCallbacks()
-{
-	//glutDisplayFunc(RenderSceneCB);
-	/*glutKeyboardFunc(KeyboardCB);
-	glutSpecialFunc(SpecialKeyboardCB);*/
 }
 
 void SOGLWindow::Update()

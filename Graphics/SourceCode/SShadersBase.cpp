@@ -8,9 +8,9 @@ SShadersBase::SShadersBase()
 {
 }
 
-SShadersBase::SShadersBase(std::string vertexShaderFileName, std::string fragmentShaderFileName)
+SShadersBase::SShadersBase(std::string vertexShaderFileName, std::string fragmentShaderFileName, std::vector<std::string> uniformNamesVector)
 {
-	InitializeUniformVariableNamesVector();
+	InitializeUniformVariableNamesVector(uniformNamesVector);
 	LoadShaderWithFileNames(vertexShaderFileName, fragmentShaderFileName);
 }
 
@@ -182,9 +182,9 @@ void SShadersBase::ValidateShaderProgram()
 	}
 }
 
-void SShadersBase::InitializeUniformVariableNamesVector()
+void SShadersBase::InitializeUniformVariableNamesVector(std::vector<std::string> uniformNamesVector)
 {
-	m_UniformVariableNamesVector.push_back("gWorldViewProjection");
+	m_UniformVariableNamesVector = uniformNamesVector;
 }
 
 #pragma endregion

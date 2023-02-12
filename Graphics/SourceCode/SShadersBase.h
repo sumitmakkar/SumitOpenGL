@@ -13,7 +13,7 @@ class SShadersBase
 
 	public:
 		SShadersBase();
-		SShadersBase(std::string vertexShaderFileName, std::string fragmentShaderFileName);
+		SShadersBase(std::string vertexShaderFileName, std::string fragmentShaderFileName, std::vector<std::string> uniformNamesVector = std::vector<std::string>());
 		~SShadersBase();
 		void UseShader();	//Step 9
 		GLuint GetUniformVariableLocation(std::string uniformVariableName);
@@ -27,5 +27,5 @@ class SShadersBase
 		void LinkProgram();	//Step 7
 		void PopulateUniformLocations();
 		void ValidateShaderProgram();	//Step 8
-		void InitializeUniformVariableNamesVector();
+		void InitializeUniformVariableNamesVector(std::vector<std::string> uniformNamesVector);
 };
