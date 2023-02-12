@@ -9,7 +9,7 @@ SOGLWindow::SOGLWindow(int argc, char* argv[], Vector4f windowBackgroundColour, 
 	m_WindowStartingXCoordinate = 0;
 	m_WindowStartingYCoordinate = 0;
 	m_WindowTitleString			= windowTitleString;
-	m_Camera					= new SCamera();
+	//m_Camera					= new SCamera();
 	/*m_fov = 45.0f;
 	m_zNear = 1.0f;
 	m_zFar = 100.0f;
@@ -17,9 +17,8 @@ SOGLWindow::SOGLWindow(int argc, char* argv[], Vector4f windowBackgroundColour, 
 	CreateOpenGLWindow(argc, argv);
 }
 
-SOGLWindow::SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoordinate, int windowStartingYCoordinate, int argc, char* argv[], Vector4f windowBackgroundColour, SCamera* camera, SRendererBase* renderer, std::string windowTitleString): m_WindowBackgroundColour(windowBackgroundColour), m_Camera(camera), m_renderer(renderer)
+SOGLWindow::SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoordinate, int windowStartingYCoordinate, int argc, char* argv[], Vector4f windowBackgroundColour, SRendererBase* renderer, std::string windowTitleString): m_WindowBackgroundColour(windowBackgroundColour), m_renderer(renderer)
 {
-	//m_SelfReference = this;
 	m_WindowWidth				= windowWidth;
 	m_WindowHeight				= windowHeight;
 	m_WindowStartingXCoordinate = windowStartingXCoordinate;
@@ -58,7 +57,7 @@ void SOGLWindow::CreateOpenGLWindow(int argc, char* argv[])
 		SetWindowBackgroundColour();
 		EnableWindowParameters();
 		InitializeGlutCallbacks();
-		glutMainLoop();
+		//glutMainLoop();
 	}
 }
 
@@ -113,15 +112,24 @@ void SOGLWindow::EnableWindowParameters()
 
 void SOGLWindow::InitializeGlutCallbacks()
 {
+	//glutDisplayFunc(RenderSceneCB);
+	/*glutKeyboardFunc(KeyboardCB);
+	glutSpecialFunc(SpecialKeyboardCB);*/
+}
+
+void SOGLWindow::Update()
+{
 	glutDisplayFunc(RenderSceneCB);
 	glutKeyboardFunc(KeyboardCB);
 	glutSpecialFunc(SpecialKeyboardCB);
+	glutMainLoop();
 }
 
 void SOGLWindow::RenderSceneCB()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	selfReference->m_renderer->UpdateScene(0.1f);
 	selfReference->m_renderer->RenderScene();
 
 	glutPostRedisplay();	//For calling this function multiple times
@@ -131,10 +139,10 @@ void SOGLWindow::RenderSceneCB()
 
 void SOGLWindow::KeyboardCB(unsigned char key, int mouse_x, int mouse_y)
 {
-	selfReference->m_Camera->OnKeyboard(key);
+	selfReference->m_renderer->HandleMouseAndKeyboardEvents(key, mouse_x, mouse_y);
 }
 
 void SOGLWindow::SpecialKeyboardCB(int key, int mouse_x, int mouse_y)
 {
-	selfReference->m_Camera->OnKeyboard(key);
+	selfReference->m_renderer->HandleMoouseAndKeyboardSpecialEvents(key, mouse_x, mouse_y);
 }

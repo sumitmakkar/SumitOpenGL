@@ -19,14 +19,14 @@ class SOGLWindow
 		int			   m_WindowHeight;
 		Vector4f	   m_WindowBackgroundColour;
 
-		SCamera*	   m_Camera   = NULL;
 		SRendererBase* m_renderer = NULL;
 
 	public:
 		SOGLWindow(int argc, char* argv[], Vector4f windowBackgroundColour, SRendererBase* renderer, std::string windowTitleString = "OpenGlWindow");
-		SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoordinate, int windowStartingYCoordinate, int argc, char* argv[], Vector4f windowBackgroundColour, SCamera* camera, SRendererBase* renderer, std::string windowTitleString = "OpenGlWindow");
+		SOGLWindow(int windowWidth, int windowHeight, int windowStartingXCoordinate, int windowStartingYCoordinate, int argc, char* argv[], Vector4f windowBackgroundColour, SRendererBase* renderer, std::string windowTitleString = "OpenGlWindow");
 		~SOGLWindow();
 		//void SetRenderer();
+		void Update();
 
 	private:
 		void CreateOpenGLWindow(int argc, char* argv[]);

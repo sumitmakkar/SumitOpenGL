@@ -187,6 +187,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\Meshes\BasicCube.h" />
     <ClInclude Include="SourceCode\SCamera.h" />
     <ClInclude Include="SourceCode\SMeshBase.h" />
     <ClInclude Include="SourceCode\SOGLWindow.h" />
@@ -195,8 +196,10 @@
     <ClInclude Include="SourceCode\SRendererBase.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\Meshes\BasicCube.cpp" />
     <ClCompile Include="SourceCode\SCamera.cpp" />
     <ClCompile Include="SourceCode\SMeshBase.cpp" />
+    <ClCompile Include="SourceCode\SOGLUtility.cpp" />
     <ClCompile Include="SourceCode\SOGLWindow.cpp" />
     <ClCompile Include="SourceCode\SShadersBase.cpp" />
     <ClCompile Include="SourceCode\SumitOGLMaths.cpp" />
