@@ -27,7 +27,7 @@ class SCamera
 		void SetPosition(float x, float y, float z);
 		void OnKeyboard(unsigned char key);
 		void OnMouse(int x, int y);
-		void OnRender();
+		void RenderForMouseEdgeCases();
 		Matrix4f GetMatrix();
 
 	private:

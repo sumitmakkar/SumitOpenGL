@@ -34,7 +34,7 @@ void Renderer::RenderScene()
 
 void Renderer::UpdateScene(float dt)
 {
-	m_GameCamera.OnRender();
+	m_GameCamera.RenderForMouseEdgeCases();	//Called if the mouse is resting in the margins.
 #ifdef _WIN64
 	float YRotationAngle = 0.5f;
 #else

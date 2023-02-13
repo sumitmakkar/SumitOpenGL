@@ -98,7 +98,6 @@ void SCamera::OnMouse(int x, int y)
 	int deltaX = x - m_MousePos.x;
 	int deltaY = y - m_MousePos.y;
 
-	printf("%d\n", y);
 	m_MousePos.x = x;
 	m_MousePos.y = y;
 
@@ -132,7 +131,7 @@ void SCamera::OnMouse(int x, int y)
 	Update();
 }
 
-void SCamera::OnRender()
+void SCamera::RenderForMouseEdgeCases()
 {
 	bool shouldUpdate = false;
 	if (m_OnLeftEdge)
