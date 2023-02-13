@@ -22,13 +22,18 @@ class Renderer : public SRendererBase
 		int			 m_WindowWidth;
 		int			 m_WindowHeight;
 
+		Vector3f	 m_CameraPos	= Vector3f(0.0f, 0.0f, -1.0f);
+		Vector3f	 m_CameraTarget = Vector3f(1.0f, 0.0f, 1.0f);
+		Vector3f	 m_CameraUp		= Vector3f(0.0f, 1.0f, 0.0f);
+
 	public:
 		Renderer(int windowWidth = 1600, int windowHeight = 800);
 		~Renderer();
 		void RenderScene() override;
 		void UpdateScene(float dt) override;
-		void HandleMouseAndKeyboardEvents(unsigned char key, int mouse_x, int mouse_y) override;
-		void HandleMoouseAndKeyboardSpecialEvents(int key, int mouse_x, int mouse_y) override;
+		void HandleKeyboardEvents(unsigned char key, int mouse_x, int mouse_y) override;
+		void HandleKeyboardSpecialEvents(int key, int mouse_x, int mouse_y) override;
+		void HandleMouseEvents(int x, int y) override;
 
 	private:
 		void InitializeShaderAndObjects();

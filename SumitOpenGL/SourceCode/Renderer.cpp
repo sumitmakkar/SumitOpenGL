@@ -10,6 +10,7 @@ Renderer::Renderer(int windowWidth, int windowHeight)
 	m_WindowWidth  = windowWidth;
 	m_WindowHeight = windowHeight;
 	m_PersProjInfo = { m_fov, (float)m_WindowWidth, (float)m_WindowHeight, m_ZNear, m_ZFar };
+	m_GameCamera   = SCamera(m_WindowWidth, m_WindowHeight, m_CameraPos, m_CameraTarget, m_CameraUp);
 	InitializeShaderAndObjects();
 }
 
@@ -33,6 +34,7 @@ void Renderer::RenderScene()
 
 void Renderer::UpdateScene(float dt)
 {
+	m_GameCamera.RenderForMouseEdgeCases();	//Called if the mouse is resting in the margins.
 #ifdef _WIN64
 	float YRotationAngle = 0.5f;
 #else
@@ -56,12 +58,17 @@ void Renderer::UpdateScene(float dt)
 	glUniformMatrix4fv(m_gWVPLocation, 1, GL_TRUE, &finalMatrix.m[0][0]);
 }
 
-void Renderer::HandleMouseAndKeyboardEvents(unsigned char key, int mouse_x, int mouse_y)
+void Renderer::HandleKeyboardEvents(unsigned char key, int mouse_x, int mouse_y)
 {
 	m_GameCamera.OnKeyboard(key);
 }
 
-void Renderer::HandleMoouseAndKeyboardSpecialEvents(int key, int mouse_x, int mouse_y)
+void Renderer::HandleKeyboardSpecialEvents(int key, int mouse_x, int mouse_y)
 {
 	m_GameCamera.OnKeyboard(key);
+}
+
+void Renderer::HandleMouseEvents(int x, int y)
+{
+	m_GameCamera.OnMouse(x, y);
 }
