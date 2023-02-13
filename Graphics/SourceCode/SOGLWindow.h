@@ -38,4 +38,5 @@ class SOGLWindow
 		static void RenderSceneCB();
 		static void KeyboardCB(unsigned char key, int mouse_x, int mouse_y);
 		static void SpecialKeyboardCB(int key, int mouse_x, int mouse_y);
+		static void PassiveMouseCB(int x, int y);
 };

@@ -104,6 +104,7 @@ void SOGLWindow::UpdateFrame()
 	glutDisplayFunc(RenderSceneCB);
 	glutKeyboardFunc(KeyboardCB);
 	glutSpecialFunc(SpecialKeyboardCB);
+	glutPassiveMotionFunc(PassiveMouseCB);
 	glutMainLoop();
 }
 
@@ -126,10 +127,15 @@ void SOGLWindow::RenderSceneCB()
 
 void SOGLWindow::KeyboardCB(unsigned char key, int mouse_x, int mouse_y)
 {
-	selfReference->m_renderer->HandleMouseAndKeyboardEvents(key, mouse_x, mouse_y);
+	selfReference->m_renderer->HandleKeyboardEvents(key, mouse_x, mouse_y);
 }
 
 void SOGLWindow::SpecialKeyboardCB(int key, int mouse_x, int mouse_y)
 {
-	selfReference->m_renderer->HandleMoouseAndKeyboardSpecialEvents(key, mouse_x, mouse_y);
+	selfReference->m_renderer->HandleKeyboardSpecialEvents(key, mouse_x, mouse_y);
+}
+
+void SOGLWindow::PassiveMouseCB(int x, int y)
+{
+	selfReference->m_renderer->HandleMouseEvents(x, y);
 }
