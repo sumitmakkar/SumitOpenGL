@@ -26,13 +26,31 @@ void SMeshBase::CreateVertexBuffer()
 
 void SMeshBase::SetAttributes()
 {
+	int attribPointerIndex = 0;
+	int stride			   = 0;
 	//Position
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), 0);
-
+	if (m_HasPosition)
+	{
+		glEnableVertexAttribArray(attribPointerIndex++);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+		stride += 3;
+		/*glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), 0);*/
+	}
 	//Colour
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	if (m_HasColour)
+	{
+		glEnableVertexAttribArray(attribPointerIndex++);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(stride * sizeof(float)));
+		stride += 3;
+		//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	}
+	//Texture
+	if (m_HasPosition)
+	{
+		glEnableVertexAttribArray(attribPointerIndex++);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(stride * sizeof(float)));
+		stride += 2;
+	}
 }
 
 void SMeshBase::CreateIndexBuffer()

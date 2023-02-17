@@ -14,6 +14,10 @@ class SMeshBase
 		GLsizeiptr	    m_IndicesSize;
 		SWorldTransform m_WorldTransform;
 
+		bool			m_HasPosition = false;
+		bool			m_HasColour	  = false;
+		bool			m_HasTexture  = false;
+
 	public:
 		SMeshBase();
 		SMeshBase(Vertex* vertices, GLsizeiptr verticesSize, unsigned int* indices, GLsizeiptr indicesSize);	// Not required

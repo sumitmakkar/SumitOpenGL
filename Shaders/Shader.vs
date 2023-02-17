@@ -1,14 +1,14 @@
-#version 330 core
+#version 330
 
 layout (location = 0) in vec3 Position;
-layout (location = 1) in vec3 InColour;
+layout (location = 1) in vec2 TexCoord;
 
-out vec4 Colour;
+uniform mat4 gWorldViewPosition;
 
-uniform mat4 gWorldViewProjection;
+out vec2 TexCoord0;
 
 void main()
 {
-    gl_Position = gWorldViewProjection * vec4(Position, 1.0);
-    Colour      = vec4(InColour, 1.0);
+    gl_Position = gWorldViewPosition * vec4(Position, 1.0);
+    TexCoord0 = TexCoord;
 }

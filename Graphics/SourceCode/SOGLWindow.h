@@ -7,6 +7,7 @@
 #include <SumitOGLMaths.h>
 #include "SCamera.h"
 #include "SRendererBase.h"
+#include "SOGLTextureBase.h"
 
 class SOGLWindow
 {

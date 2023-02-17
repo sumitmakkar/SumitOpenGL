@@ -20,9 +20,23 @@ Renderer::~Renderer()
 
 void Renderer::InitializeShaderAndObjects()
 {
-	std::vector<std::string> uniformNamesVector = { "gWorldViewProjection" };
+	std::vector<std::string> uniformNamesVector = { "gWorldViewPosition", "gSampler"};
 	m_BasicShader								= SShadersBase(m_VSFileName, m_FSFileName, uniformNamesVector);
 	m_Cube										= new BasicCube();
+	LoadShaderUniformVariables();
+	LoadTexture();
+}
+
+void Renderer::LoadShaderUniformVariables()
+{
+	m_gSamplerLocation = m_BasicShader.GetUniformVariableLocation("gSampler");
+	m_gWVPLocation	   = m_BasicShader.GetUniformVariableLocation("gWorldViewPosition");
+}
+
+void Renderer::LoadTexture()
+{
+	m_Texture = new SOGLTextureBase(GL_TEXTURE_2D, "Assets/bricks.jpg");
+	if (!m_Texture->Load()) { return; }
 }
 
 void Renderer::RenderScene()
@@ -53,9 +67,11 @@ void Renderer::UpdateScene(float dt)
 
 	Matrix4f finalMatrix = projection * view * world;
 
-	m_gWVPLocation = m_BasicShader.GetUniformVariableLocation("gWorldViewProjection");
-
 	glUniformMatrix4fv(m_gWVPLocation, 1, GL_TRUE, &finalMatrix.m[0][0]);
+
+	//Binding Texture
+	m_Texture->Bind(GL_TEXTURE0);
+	glUniform1i(m_gSamplerLocation, 0);
 }
 
 void Renderer::HandleKeyboardEvents(unsigned char key, int mouse_x, int mouse_y)

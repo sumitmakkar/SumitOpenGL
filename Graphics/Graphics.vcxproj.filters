@@ -36,6 +36,9 @@
     <ClInclude Include="SourceCode\Meshes\BasicCube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\SOGLTextureBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\SOGLWindow.cpp">
@@ -53,7 +56,7 @@
     <ClCompile Include="SourceCode\SCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\SumitOGLMaths.cpp">
+    <ClCompile Include="SourceCode\CommonUtils\SumitOGLMaths.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\SRendererBase.cpp">
@@ -62,7 +65,13 @@
     <ClCompile Include="SourceCode\Meshes\BasicCube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\SOGLUtility.cpp">
+    <ClCompile Include="SourceCode\CommonUtils\SOGLUtility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\CommonUtils\stb_image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\SOGLTextureBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
