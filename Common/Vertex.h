@@ -16,22 +16,12 @@ struct Vertex
 		if (col)	  { colour  = *col; }
 		else
 		{
-			float red = (float)rand() / (float)RAND_MAX;
+			float red   = (float)rand() / (float)RAND_MAX;
 			float green = (float)rand() / (float)RAND_MAX;
-			float blue = (float)rand() / (float)RAND_MAX;
+			float blue  = (float)rand() / (float)RAND_MAX;
 
 			colour = Vector3f(red, green, blue);
 		}
 		if (tex)	  { texture = *tex; }
 	}
-	
-	/*Vertex(float x, float y, float z = 0.0f)
-	{
-		pos = Vector3f(x, y, z);
-		float red   = (float)rand() / (float)RAND_MAX;
-		float green = (float)rand() / (float)RAND_MAX;
-		float blue  = (float)rand() / (float)RAND_MAX;
-
-		colour		= Vector3f(red, green, blue);
-	}*/
 };
