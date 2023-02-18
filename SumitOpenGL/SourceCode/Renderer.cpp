@@ -39,16 +39,8 @@ void Renderer::LoadTexture()
 	if (!m_Texture->Load()) { return; }
 }
 
-void Renderer::RenderScene()
+void Renderer::UpdateCube()
 {
-	if (!m_Cube) { return; }
-	m_BasicShader.UseShader();
-	m_Cube->RenderMesh();
-}
-
-void Renderer::UpdateScene(float dt)
-{
-	m_GameCamera.RenderForMouseEdgeCases();	//Called if the mouse is resting in the margins.
 #ifdef _WIN64
 	float YRotationAngle = 0.5f;
 #else
@@ -68,6 +60,20 @@ void Renderer::UpdateScene(float dt)
 	Matrix4f finalMatrix = projection * view * world;
 
 	glUniformMatrix4fv(m_gWVPLocation, 1, GL_TRUE, &finalMatrix.m[0][0]);
+}
+
+void Renderer::RenderScene()
+{
+	if (!m_Cube) { return; }
+	m_BasicShader.UseShader();
+	m_Cube->RenderMesh();
+}
+
+void Renderer::UpdateScene(float dt)
+{
+	m_GameCamera.RenderForMouseEdgeCases();	//Called if the mouse is resting in the margins.
+
+	UpdateCube();
 
 	//Binding Texture
 	m_Texture->Bind(GL_TEXTURE0);

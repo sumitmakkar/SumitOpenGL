@@ -42,4 +42,7 @@ class Renderer : public SRendererBase
 		void InitializeShaderAndObjects();
 		void LoadShaderUniformVariables();
 		void LoadTexture();
+
+		//Objects Update Methods
+		void UpdateCube();
 };
