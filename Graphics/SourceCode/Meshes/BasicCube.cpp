@@ -12,16 +12,25 @@ BasicCube::~BasicCube()
 
 void BasicCube::InitializeDefaultCubeVertices(std::vector<Vertex>& vertices)
 {
+	Vector2f t00 = Vector2f(0.0f, 0.0f);  // Bottom left
+	Vector2f t01 = Vector2f(0.0f, 1.0f);  // Top left
+	Vector2f t10 = Vector2f(1.0f, 0.0f);  // Bottom right
+	Vector2f t11 = Vector2f(1.0f, 1.0f);  // Top right
+
 	vertices = {
-				Vertex(0.5f, 0.5f, 0.5f),
-				Vertex(-0.5f, 0.5f, -0.5f),
-				Vertex(-0.5f, 0.5f, 0.5f),
-				Vertex(0.5f, -0.5f, -0.5f),
-				Vertex(-0.5f, -0.5f, -0.5f),
-				Vertex(0.5f, 0.5f, -0.5f),
-				Vertex(0.5f, -0.5f, 0.5f),
-				Vertex(-0.5f, -0.5f, 0.5f)
-			   };
+				Vertex(&Vector3f(0.5f, 0.5f, 0.5f),    NULL, &t00),
+				Vertex(&Vector3f(-0.5f, 0.5f, -0.5f),  NULL, &t01),
+				Vertex(&Vector3f(-0.5f, 0.5f, 0.5f),   NULL, &t10),
+				Vertex(&Vector3f(0.5f, -0.5f, -0.5f),  NULL, &t11),
+				Vertex(&Vector3f(-0.5f, -0.5f, -0.5f), NULL, &t00),
+				Vertex(&Vector3f(0.5f, 0.5f, -0.5f),   NULL, &t10),
+				Vertex(&Vector3f(0.5f, -0.5f, 0.5f),   NULL, &t01),
+				Vertex(&Vector3f(-0.5f, -0.5f, 0.5f),  NULL, &t11)
+	};
+
+	m_HasPosition = true;
+	m_HasColour	  = true;
+	m_HasTexture  = true;
 }
 
 void BasicCube::InitializeDefaultCubeIndices(std::vector<unsigned int>& indices)

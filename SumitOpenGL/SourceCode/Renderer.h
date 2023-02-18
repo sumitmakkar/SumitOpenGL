@@ -4,6 +4,7 @@
 #include <SShadersBase.h>
 #include <Meshes\BasicCube.h>
 #include <SCamera.h>
+#include <SOGLTextureBase.h>
 
 class Renderer : public SRendererBase
 {
@@ -21,6 +22,8 @@ class Renderer : public SRendererBase
 		float 		 m_ZFar;
 		int			 m_WindowWidth;
 		int			 m_WindowHeight;
+		SOGLTextureBase* m_Texture = NULL;
+		GLuint		   m_gSamplerLocation;
 
 		Vector3f	 m_CameraPos	= Vector3f(0.0f, 0.0f, -1.0f);
 		Vector3f	 m_CameraTarget = Vector3f(1.0f, 0.0f, 1.0f);
@@ -37,4 +40,9 @@ class Renderer : public SRendererBase
 
 	private:
 		void InitializeShaderAndObjects();
+		void LoadShaderUniformVariables();
+		void LoadTexture();
+
+		//Objects Update Methods
+		void UpdateCube();
 };
