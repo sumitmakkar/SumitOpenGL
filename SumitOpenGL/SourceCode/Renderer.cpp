@@ -71,7 +71,7 @@ void Renderer::RenderScene()
 
 void Renderer::UpdateScene(float dt)
 {
-	m_GameCamera.RenderForMouseEdgeCases();	//Called if the mouse is resting in the margins.
+	m_GameCamera.RenderForMouseEdgeCases();		//Called if the mouse is resting in the margins.
 
 	UpdateCube();
 
