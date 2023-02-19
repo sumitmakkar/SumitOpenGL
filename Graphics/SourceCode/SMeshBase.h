@@ -5,6 +5,15 @@
 
 class SMeshBase
 {
+	enum VertexAttributesEnum		//Ordering in Shaders
+	{
+		Vertices,
+		Colours,
+		Textures,
+		Normals,
+		Tangents
+	};
+
 	protected:
 		GLuint			m_VAO;
 		GLuint			m_VBO;
@@ -19,6 +28,15 @@ class SMeshBase
 		bool			m_HasColour	  = false;
 		bool			m_HasTexture  = false;
 
+		//Vertice Attributes Data
+		/*Vector3f* m_Vertices = NULL;
+		Vector4f* m_Colours  = NULL;
+		Vector2f* m_Textures = NULL;
+		Vector3f* m_Normals  = NULL;
+		Vector4f* m_Tangents = NULL;*/
+
+		VertexAttributesEnum vertexAttributesEnumForIteration;
+
 	public:
 		SMeshBase();
 		SMeshBase(Vertex* vertices, GLsizeiptr verticesSize, unsigned int* indices, GLsizeiptr indicesSize);	// Not required
@@ -31,4 +49,7 @@ class SMeshBase
 		void CreateVertexBuffer();
 		void CreateIndexBuffer();
 		void SetAttributes();
+
+	private:
+		void SendAttributesToGPU();
 };

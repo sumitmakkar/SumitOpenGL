@@ -2,15 +2,12 @@
 
 SMeshBase::SMeshBase() : m_VAO(0), m_VBO(0), m_IBO(0), m_Vertices(NULL), m_VerticesSize(0), m_Indices(NULL), m_IndicesSize(0)
 {
-	//m_WorldTransform = WorldTransform();
+	
 }
 
 SMeshBase::SMeshBase(Vertex* vertices, GLsizeiptr verticesSize, unsigned int* indices, GLsizeiptr indicesSize) : m_VAO(0), m_VBO(0), m_IBO(0), m_Vertices(vertices), m_VerticesSize(verticesSize), m_Indices(indices), m_IndicesSize(indicesSize)
 {
-	//m_WorldTransform = WorldTransform();
-	/*CreateVertexBuffer();
-	CreateIndexBuffer();
-	SetAttributes();*/
+
 }
 
 SMeshBase::~SMeshBase()
@@ -48,9 +45,26 @@ void SMeshBase::SetAttributes()
 	if (m_HasPosition)
 	{
 		glEnableVertexAttribArray(attribPointerIndex++);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(stride * sizeof(float)));
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(stride * sizeof(float)));
 		stride += 2;
 	}
+
+	// Changes
+	/*for (int i = Vertices; i < Tangents; i++)
+	{
+		switch (vertexAttributesEnumForIteration)
+		{
+			case VertexAttributesEnum::Vertices:
+				glEnableVertexAttribArray(attribPointerIndex++);
+				glVertexAttribPointer(,)
+				break;
+		}
+	}*/
+}
+
+void SMeshBase::SendAttributesToGPU()
+{
+
 }
 
 void SMeshBase::CreateIndexBuffer()
@@ -66,12 +80,9 @@ void SMeshBase::RenderMesh()
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
 
-	SetAttributes();	//Setting attributes because it has been deleted in the end. Remove this if the disabled statements are removed in the end.
-
 	glDrawElements(GL_TRIANGLES, (GLsizei)(m_IndicesSize / sizeof(m_Indices[0])), GL_UNSIGNED_INT, 0);
 
-	glDisableVertexAttribArray(0);	//Position
-	glDisableVertexAttribArray(1);	//Colour
+	glBindVertexArray(0);
 }
 
 SWorldTransform& SMeshBase::GetWorldTransform()

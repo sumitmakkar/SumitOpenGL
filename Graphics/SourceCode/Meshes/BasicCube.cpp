@@ -4,6 +4,7 @@ BasicCube::BasicCube(std::vector<Vertex> cubeVertices, std::vector<unsigned int>
 {
 	CreateVertices(cubeVertices);
 	CreateIndices(cubeIndices);
+	SetAttributes();
 }
 
 BasicCube::~BasicCube()

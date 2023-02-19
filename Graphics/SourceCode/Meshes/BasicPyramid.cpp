@@ -4,6 +4,7 @@ BasicPyramid::BasicPyramid(std::vector<Vertex> pyramidVertices, std::vector<unsi
 {
 	CreateVertices(pyramidVertices);
 	CreateIndices(pyramidIndices);
+	SetAttributes();
 }
 
 BasicPyramid::~BasicPyramid()

@@ -66,7 +66,7 @@ void Renderer::UpdateCurrentMesh()
 
 void Renderer::RenderScene()
 {
-	if (!m_Cube) { return; }
+	if (!m_CurrentMesh) { return; }
 	m_BasicShader.UseShader();
 	m_CurrentMesh->RenderMesh();
 }
