@@ -39,6 +39,9 @@
     <ClInclude Include="SourceCode\SOGLTextureBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\Meshes\BasicPyramid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\SOGLWindow.cpp">
@@ -72,6 +75,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\SOGLTextureBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Meshes\BasicPyramid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

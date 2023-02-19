@@ -6,6 +6,7 @@
 class SMeshBase
 {
 	protected:
+		GLuint			m_VAO;
 		GLuint			m_VBO;
 		GLuint			m_IBO;
 		Vertex*			m_Vertices; //TODO: - To be changed later. Rather than having an object of vertex, have all attributes there in this mesh base class. So that ever attribute can be checked and uploaded to the GPU, without occupying additional space.
@@ -24,6 +25,7 @@ class SMeshBase
 		~SMeshBase();
 		virtual void RenderMesh();
 		SWorldTransform& GetWorldTransform();
+		void Bind();
 
 	protected:
 		void CreateVertexBuffer();

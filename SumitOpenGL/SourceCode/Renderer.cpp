@@ -22,9 +22,11 @@ void Renderer::InitializeShaderAndObjects()
 {
 	std::vector<std::string> uniformNamesVector = { "gWorldViewPosition", "gSampler"};
 	m_BasicShader								= SShadersBase(m_VSFileName, m_FSFileName, uniformNamesVector);
+	m_Pyramid									= new BasicPyramid();
 	m_Cube										= new BasicCube();
 	LoadShaderUniformVariables();
 	LoadTexture();
+	m_CurrentMesh = m_Cube;
 }
 
 void Renderer::LoadShaderUniformVariables()
@@ -39,7 +41,7 @@ void Renderer::LoadTexture()
 	if (!m_Texture->Load()) { return; }
 }
 
-void Renderer::UpdateCube()
+void Renderer::UpdateCurrentMesh()
 {
 #ifdef _WIN64
 	float YRotationAngle = 0.5f;
@@ -47,10 +49,10 @@ void Renderer::UpdateCube()
 	float YRotationAngle = 0.2f;
 #endif
 
-	SWorldTransform& cubeWorldTransform = m_Cube->GetWorldTransform();
-	cubeWorldTransform.SetPosition(0.0f, 0.0f, 2.0f);
-	cubeWorldTransform.Rotate(0.0f, YRotationAngle, 0.0f);
-	Matrix4f world = cubeWorldTransform.GetMatrix();
+	SWorldTransform& currentSelectedMeshWorldTransform = m_CurrentMesh->GetWorldTransform();
+	currentSelectedMeshWorldTransform.SetPosition(0.0f, 0.0f, 2.0f);
+	currentSelectedMeshWorldTransform.Rotate(0.0f, YRotationAngle, 0.0f);
+	Matrix4f world = currentSelectedMeshWorldTransform.GetMatrix();
 
 	Matrix4f view = m_GameCamera.GetMatrix();
 
@@ -66,14 +68,14 @@ void Renderer::RenderScene()
 {
 	if (!m_Cube) { return; }
 	m_BasicShader.UseShader();
-	m_Cube->RenderMesh();
+	m_CurrentMesh->RenderMesh();
 }
 
 void Renderer::UpdateScene(float dt)
 {
 	m_GameCamera.RenderForMouseEdgeCases();		//Called if the mouse is resting in the margins.
 
-	UpdateCube();
+	UpdateCurrentMesh();
 
 	//Binding Texture
 	m_Texture->Bind(GL_TEXTURE0);
@@ -83,6 +85,15 @@ void Renderer::UpdateScene(float dt)
 void Renderer::HandleKeyboardEvents(unsigned char key, int mouse_x, int mouse_y)
 {
 	m_GameCamera.OnKeyboard(key);
+	switch (key)
+	{
+		case '1':
+			m_CurrentMesh = m_Cube;
+			break;
+		case '2':
+			m_CurrentMesh = m_Pyramid;
+			break;
+	}
 }
 
 void Renderer::HandleKeyboardSpecialEvents(int key, int mouse_x, int mouse_y)

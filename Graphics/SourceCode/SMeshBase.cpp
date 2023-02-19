@@ -1,16 +1,16 @@
 #include "SMeshBase.h"
 
-SMeshBase::SMeshBase() : m_VBO(0), m_IBO(0), m_Vertices(NULL), m_VerticesSize(0), m_Indices(NULL), m_IndicesSize(0)
+SMeshBase::SMeshBase() : m_VAO(0), m_VBO(0), m_IBO(0), m_Vertices(NULL), m_VerticesSize(0), m_Indices(NULL), m_IndicesSize(0)
 {
 	//m_WorldTransform = WorldTransform();
 }
 
-SMeshBase::SMeshBase(Vertex* vertices, GLsizeiptr verticesSize, unsigned int* indices, GLsizeiptr indicesSize) : m_VBO(0), m_IBO(0), m_Vertices(vertices), m_VerticesSize(verticesSize), m_Indices(indices), m_IndicesSize(indicesSize)
+SMeshBase::SMeshBase(Vertex* vertices, GLsizeiptr verticesSize, unsigned int* indices, GLsizeiptr indicesSize) : m_VAO(0), m_VBO(0), m_IBO(0), m_Vertices(vertices), m_VerticesSize(verticesSize), m_Indices(indices), m_IndicesSize(indicesSize)
 {
 	//m_WorldTransform = WorldTransform();
-	CreateVertexBuffer();
+	/*CreateVertexBuffer();
 	CreateIndexBuffer();
-	SetAttributes();
+	SetAttributes();*/
 }
 
 SMeshBase::~SMeshBase()
@@ -19,6 +19,8 @@ SMeshBase::~SMeshBase()
 
 void SMeshBase::CreateVertexBuffer()
 {
+	glGenVertexArrays(1, &m_VAO);
+	glBindVertexArray(m_VAO);
 	glGenBuffers(1, &m_VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 	glBufferData(GL_ARRAY_BUFFER, m_VerticesSize, m_Vertices, GL_STATIC_DRAW);
@@ -34,7 +36,6 @@ void SMeshBase::SetAttributes()
 		glEnableVertexAttribArray(attribPointerIndex++);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
 		stride += 3;
-		/*glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), 0);*/
 	}
 	//Colour
 	if (m_HasColour)
@@ -42,7 +43,6 @@ void SMeshBase::SetAttributes()
 		glEnableVertexAttribArray(attribPointerIndex++);
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(stride * sizeof(float)));
 		stride += 3;
-		//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	}
 	//Texture
 	if (m_HasPosition)
@@ -62,6 +62,7 @@ void SMeshBase::CreateIndexBuffer()
 
 void SMeshBase::RenderMesh()
 {
+	glBindVertexArray(m_VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
 
@@ -76,4 +77,9 @@ void SMeshBase::RenderMesh()
 SWorldTransform& SMeshBase::GetWorldTransform()
 {
 	return m_WorldTransform;
+}
+
+void SMeshBase::Bind()
+{
+	glBindVertexArray(m_VAO);
 }
