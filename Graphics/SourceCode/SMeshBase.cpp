@@ -1,77 +1,83 @@
 #include "SMeshBase.h"
 
-SMeshBase::SMeshBase() : m_VAO(0), m_VBO(0), m_IBO(0), m_Vertices(NULL), m_VerticesSize(0), m_Indices(NULL), m_IndicesSize(0)
+SMeshBase::SMeshBase() : m_VAO(0), m_VBO(0), m_IBO(0), m_Vertices(NULL), m_NumberOfVertices(0), m_Indices(NULL), m_NumberOfIndices(0)
 {
-	//m_WorldTransform = WorldTransform();
+	glGenVertexArrays(1, &m_VAO);
 }
 
-SMeshBase::SMeshBase(Vertex* vertices, GLsizeiptr verticesSize, unsigned int* indices, GLsizeiptr indicesSize) : m_VAO(0), m_VBO(0), m_IBO(0), m_Vertices(vertices), m_VerticesSize(verticesSize), m_Indices(indices), m_IndicesSize(indicesSize)
+SMeshBase::SMeshBase(Vector3f* vertices,
+					 GLuint numberOfVertices,
+					 unsigned int* indices,
+				     GLuint numberOfIndices) : m_VAO(0),
+											   m_VBO(0),
+											   m_IBO(0),
+											   m_Vertices(vertices),
+											   m_NumberOfVertices(numberOfVertices),
+											   m_Indices(indices),
+											   m_NumberOfIndices(numberOfIndices)
 {
-	//m_WorldTransform = WorldTransform();
-	/*CreateVertexBuffer();
-	CreateIndexBuffer();
-	SetAttributes();*/
+	glGenVertexArrays(1, &m_VAO);
 }
 
 SMeshBase::~SMeshBase()
 {
 }
 
-void SMeshBase::CreateVertexBuffer()
-{
-	glGenVertexArrays(1, &m_VAO);
-	glBindVertexArray(m_VAO);
-	glGenBuffers(1, &m_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBufferData(GL_ARRAY_BUFFER, m_VerticesSize, m_Vertices, GL_STATIC_DRAW);
-}
-
 void SMeshBase::SetAttributes()
 {
-	int attribPointerIndex = 0;
-	int stride			   = 0;
-	//Position
-	if (m_HasPosition)
+	// Change for this commit
+	glBindVertexArray(m_VAO);
+	if (m_Vertices)
 	{
-		glEnableVertexAttribArray(attribPointerIndex++);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-		stride += 3;
+		SendAttributeToGPU(&m_AttibuteBufferObjectsHandleID[VertexAttributesBufferEnum::Vertices], m_NumberOfVertices, sizeof(Vector3f), VertexAttributesBufferEnum::Vertices, 3, m_Vertices, "Vertices");
 	}
-	//Colour
-	if (m_HasColour)
+	if (m_Colours)
 	{
-		glEnableVertexAttribArray(attribPointerIndex++);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(stride * sizeof(float)));
-		stride += 3;
+		SendAttributeToGPU(&m_AttibuteBufferObjectsHandleID[VertexAttributesBufferEnum::Colours], m_NumberOfVertices, sizeof(Vector4f), VertexAttributesBufferEnum::Colours, 4, m_Colours, "Colours");
 	}
-	//Texture
-	if (m_HasPosition)
+	if (m_Textures)
 	{
-		glEnableVertexAttribArray(attribPointerIndex++);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(stride * sizeof(float)));
-		stride += 2;
+		SendAttributeToGPU(&m_AttibuteBufferObjectsHandleID[VertexAttributesBufferEnum::Textures], m_NumberOfVertices, sizeof(Vector2f), VertexAttributesBufferEnum::Textures, 2, m_Textures, "Textures");
+	}
+	if (m_Normals)
+	{
+		SendAttributeToGPU(&m_AttibuteBufferObjectsHandleID[VertexAttributesBufferEnum::Normals], m_NumberOfVertices, sizeof(Vector3f), VertexAttributesBufferEnum::Normals, 3, m_Normals, "Normals");
+	}
+	if (m_Tangents)
+	{
+		SendAttributeToGPU(&m_AttibuteBufferObjectsHandleID[VertexAttributesBufferEnum::Tangents], m_NumberOfVertices, sizeof(Vector4f), VertexAttributesBufferEnum::Tangents, 4, m_Tangents, "Tangents");
+	}
+
+	if (m_Indices)
+	{
+		glGenBuffers(1, &m_AttibuteBufferObjectsHandleID[VertexAttributesBufferEnum::Indices]);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_AttibuteBufferObjectsHandleID[VertexAttributesBufferEnum::Indices]);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_NumberOfIndices * sizeof(GLuint), m_Indices, GL_STATIC_DRAW);
 	}
 }
 
-void SMeshBase::CreateIndexBuffer()
+void SMeshBase::SendAttributeToGPU(GLuint*			  attributeHandleID,
+								   int				  numberOfVertices,
+								   int				  singleVertexDataSize,
+								   GLuint			  attributeIndex,	//Attribute Location in shader
+								   int				  elementsInSingleVertexData,
+								   const void*		  attributesData,
+								   const std::string& attributeNameString)
 {
-	glGenBuffers(1, &m_IBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_IndicesSize, m_Indices, GL_STATIC_DRAW);
+	glGenBuffers(1, attributeHandleID);
+	glBindBuffer(GL_ARRAY_BUFFER, *attributeHandleID);
+	glBufferData(GL_ARRAY_BUFFER, numberOfVertices * singleVertexDataSize, attributesData, GL_STATIC_DRAW);
+
+	//Attributes
+	glEnableVertexAttribArray(attributeIndex);
+	glVertexAttribPointer(attributeIndex, elementsInSingleVertexData, GL_FLOAT, GL_FALSE, 0, 0);
 }
 
 void SMeshBase::RenderMesh()
 {
 	glBindVertexArray(m_VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
-
-	SetAttributes();	//Setting attributes because it has been deleted in the end. Remove this if the disabled statements are removed in the end.
-
-	glDrawElements(GL_TRIANGLES, (GLsizei)(m_IndicesSize / sizeof(m_Indices[0])), GL_UNSIGNED_INT, 0);
-
-	glDisableVertexAttribArray(0);	//Position
-	glDisableVertexAttribArray(1);	//Colour
+	glDrawElements(GL_TRIANGLES, (GLsizei)(m_NumberOfIndices), GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
 }
 
 SWorldTransform& SMeshBase::GetWorldTransform()
