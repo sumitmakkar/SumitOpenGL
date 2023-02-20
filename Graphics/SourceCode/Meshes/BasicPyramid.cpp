@@ -17,18 +17,18 @@ void BasicPyramid::InitializeBasicPyramidVerticesData(std::vector<Vector3f>& pyr
 {
 	pyramidVertices = {
 						Vector3f(-1.0f, -1.0f,  0.5773f),
-						Vector3f(0.0f, -1.0f, -1.15475f),
-						Vector3f(1.0f, -1.0f,  0.5773f),
-						Vector3f(0.0f,  1.0f,  0.0f)
+						Vector3f( 0.0f, -1.0f, -1.15475f),
+						Vector3f( 1.0f, -1.0f,  0.5773f),
+						Vector3f( 0.0f,  1.0f,  0.0f)
 					  };
 }
 
 void BasicPyramid::InitializeBasicPyramidTextureData(std::vector<Vector2f>& pyramidTexture)
 {
-	Vector2f t00   = Vector2f(0.0f, 0.0f);
-	Vector2f t050  = Vector2f(0.5f, 0.0f);
-	Vector2f t10   = Vector2f(1.0f, 0.0f);
-	Vector2f t051  = Vector2f(0.5f, 1.0f);
+	Vector2f t00  = Vector2f(0.0f, 0.0f);
+	Vector2f t050 = Vector2f(0.5f, 0.0f);
+	Vector2f t10  = Vector2f(1.0f, 0.0f);
+	Vector2f t051 = Vector2f(0.5f, 1.0f);
 
 	pyramidTexture = {
 						t00,
