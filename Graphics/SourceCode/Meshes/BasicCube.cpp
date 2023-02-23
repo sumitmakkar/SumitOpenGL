@@ -72,10 +72,8 @@ void BasicCube::CreateVertices(std::vector<Vector3f> cubeVertices)
 {
 	if (cubeVertices.empty()) { InitializeBasicCubeVerticesData(cubeVertices); }
 	int cubeVerticesSize = (int)cubeVertices.size();
-	//m_Vertices			 = new Vector3f[cubeVerticesSize];
 	m_Vertices			 = cubeVertices;
 	m_NumberOfVertices	 = cubeVerticesSize;
-	//for (int i = 0; i < cubeVerticesSize; i++) { m_Vertices[i] = cubeVertices[i]; }
 }
 
 void BasicCube::CreateColours(std::vector<Vector4f> cubeColours)
@@ -86,8 +84,7 @@ void BasicCube::CreateTextures(std::vector<Vector2f> cubeTextutres)
 {
 	if (cubeTextutres.empty()) { InitializeBasicCubeTextureData(cubeTextutres); }
 	int cubeTextureSize = (int)cubeTextutres.size();
-	m_Textures			= cubeTextutres;//new Vector2f[cubeTextureSize];
-	//for (int i = 0; i < cubeTextureSize; i++) { m_Textures[i] = cubeTextutres[i]; }
+	m_Textures			= cubeTextutres;
 }
 
 void BasicCube::CreateNormals(std::vector<Vector3f> cubeNormals)
@@ -103,9 +100,5 @@ void BasicCube::CreateIndices(std::vector<GLuint> cubeIndices)
 	if (cubeIndices.empty()) { InitializeBasicCubeIndicesData(cubeIndices); }
 	int cubeIndicesSize = (int)cubeIndices.size();
 	m_NumberOfIndices	= cubeIndicesSize;
-	m_Indices			= cubeIndices;/*new GLuint[cubeIndicesSize];
-	for (int i = 0; i < cubeIndicesSize; i++)
-	{
-		m_Indices[i] = cubeIndices[i];
-	}*/
+	m_Indices			= cubeIndices;
 }

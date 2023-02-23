@@ -5,6 +5,10 @@
 #include "Vertex.h"
 #include "SOGLUtility.h"
 
+#define NULL_2D_VECTOR std::vector<Vector2f>()
+#define NULL_3D_VECTOR std::vector<Vector3f>()
+#define NULL_4D_VECTOR std::vector<Vector4f>()
+
 class BasicCube : public SMeshBase
 {
 	public:
