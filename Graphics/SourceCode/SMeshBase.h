@@ -17,28 +17,28 @@ class SMeshBase
 	};
 
 	protected:
-		GLuint			m_VAO;
-		GLuint			m_VBO;
-		GLuint			m_IBO;
-		SWorldTransform m_WorldTransform;
+		GLuint				  m_VAO;
+		GLuint				  m_VBO;
+		GLuint				  m_IBO;
+		SWorldTransform		  m_WorldTransform;
 
 		//Vertice Attributes Data
-		Vector3f*		m_Vertices	  = NULL;
-		Vector4f*		m_Colours	  = NULL;
-		Vector2f*		m_Textures	  = NULL;
-		Vector3f*		m_Normals	  = NULL;
-		Vector4f*		m_Tangents	  = NULL;
-		GLuint*			m_Indices	  = NULL;
+		std::vector<Vector3f> m_Vertices;
+		std::vector<Vector4f> m_Colours;
+		std::vector<Vector2f> m_Textures;
+		std::vector<Vector3f> m_Normals;
+		std::vector<Vector4f> m_Tangents;
+		std::vector<GLuint>   m_Indices;
 
-		GLuint			m_AttibuteBufferObjectsHandleID[TotalAttibutes];
-		GLuint			m_NumberOfVertices;
-		GLuint			m_NumberOfIndices;
+		GLuint				  m_AttibuteBufferObjectsHandleID[TotalAttibutes];
+		GLuint				  m_NumberOfVertices;
+		GLuint				  m_NumberOfIndices;
 
 	public:
 		SMeshBase();
-		SMeshBase(Vector3f* vertices,
+		SMeshBase(std::vector<Vector3f> vertices,
 				  GLuint numberOfVertices,
-				  unsigned int* indices,
+				  std::vector<GLuint> indices,
 				  GLuint numberOfIndices);	// Not required
 		~SMeshBase();
 		virtual void RenderMesh();

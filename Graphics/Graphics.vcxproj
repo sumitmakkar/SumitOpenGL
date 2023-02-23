@@ -187,17 +187,21 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\Meshes\FileMeshLoader\SFileMeshLoader.h" />
     <ClInclude Include="SourceCode\Meshes\BasicPyramid.h" />
+    <ClInclude Include="SourceCode\Meshes\FileMeshLoader\SMaterial.h" />
     <ClInclude Include="SourceCode\SOGLTextureBase.h" />
     <ClInclude Include="SourceCode\Meshes\BasicCube.h" />
     <ClInclude Include="SourceCode\SCamera.h" />
     <ClInclude Include="SourceCode\SMeshBase.h" />
     <ClInclude Include="SourceCode\SOGLWindow.h" />
     <ClInclude Include="SourceCode\SShadersBase.h" />
+    <ClInclude Include="SourceCode\STextureUnitsCommon.h" />
     <ClInclude Include="SourceCode\SWorldTransform.h" />
     <ClInclude Include="SourceCode\SRendererBase.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\Meshes\FileMeshLoader\SFileMeshLoader.cpp" />
     <ClCompile Include="SourceCode\Meshes\BasicPyramid.cpp" />
     <ClCompile Include="SourceCode\SOGLTextureBase.cpp" />
     <ClCompile Include="SourceCode\CommonUtils\stb_image.cpp" />

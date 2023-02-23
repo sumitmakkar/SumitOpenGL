@@ -3,6 +3,7 @@
 #include <vector>
 #include "../SMeshBase.h"
 #include "Vertex.h"
+#include "SOGLUtility.h"
 
 //TODO: - TO be placed somewhere else
 #define NULL_2D_VECTOR std::vector<Vector2f>()

@@ -14,7 +14,7 @@ class SOGLTextureBase
 		int			m_imageBPP = 0;
 
 	public:
-		SOGLTextureBase(GLenum textureTarget, const std::string& fileName);
+		SOGLTextureBase(GLenum textureTarget, const std::string& fileName = "");
 		bool Load();	// Must be called once to load the texture
 		void Bind(GLenum textureUnit);	// Must be called at least once for specific texture unit
 };

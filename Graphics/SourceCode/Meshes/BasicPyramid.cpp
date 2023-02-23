@@ -52,9 +52,8 @@ void BasicPyramid::CreateVertices(std::vector<Vector3f> pyramidVertices)
 {
 	if (pyramidVertices.empty()) { InitializeBasicPyramidVerticesData(pyramidVertices); }
 	int pyramidVerticesSize = (int)pyramidVertices.size();
-	m_Vertices				= new Vector3f[pyramidVerticesSize];
+	m_Vertices				= pyramidVertices;
 	m_NumberOfVertices		= pyramidVerticesSize;
-	for (int i = 0; i < pyramidVerticesSize; i++) { m_Vertices[i] = pyramidVertices[i]; }
 }
 
 void BasicPyramid::CreateColours(std::vector<Vector4f> pyramidColours)
@@ -65,8 +64,7 @@ void BasicPyramid::CreateTextures(std::vector<Vector2f> pyramidTextutres)
 {
 	if (pyramidTextutres.empty()) { InitializeBasicPyramidTextureData(pyramidTextutres); }
 	int pyramidTextureSize = (int)pyramidTextutres.size();
-	m_Textures			   = new Vector2f[pyramidTextureSize];
-	for (int i = 0; i < pyramidTextureSize; i++) { m_Textures[i] = pyramidTextutres[i]; }
+	m_Textures			   = pyramidTextutres;
 }
 
 void BasicPyramid::CreateNormals(std::vector<Vector3f> pyramidNormals)
@@ -82,9 +80,5 @@ void BasicPyramid::CreateIndices(std::vector<GLuint> pyramidIndices)
 	if (pyramidIndices.empty()) { InitializeBasicPyramidIndicesData(pyramidIndices); }
 	int pyramidIndicesSize = (int)pyramidIndices.size();
 	m_NumberOfIndices	   = pyramidIndicesSize;
-	m_Indices			   = new GLuint[pyramidIndicesSize];
-	for (int i = 0; i < pyramidIndicesSize; i++)
-	{
-		m_Indices[i] = pyramidIndices[i];
-	}
+	m_Indices			   = pyramidIndices;
 }
