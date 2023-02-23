@@ -24,6 +24,8 @@ void Renderer::InitializeShaderAndObjects()
 	m_BasicShader								= SShadersBase(m_VSFileName, m_FSFileName, uniformNamesVector);
 	m_Pyramid									= new BasicPyramid();
 	m_Cube										= new BasicCube();
+	m_SpiderMesh								= new SFileMeshLoader();
+	m_SpiderMesh->LoadMesh("Assets/Content/spider.obj");
 	LoadShaderUniformVariables();
 	LoadTexture();
 	m_CurrentMesh = m_Cube;
@@ -50,6 +52,7 @@ void Renderer::UpdateCurrentMesh()
 #endif
 
 	SWorldTransform& currentSelectedMeshWorldTransform = m_CurrentMesh->GetWorldTransform();
+	if (m_CurrentMesh == m_SpiderMesh) { currentSelectedMeshWorldTransform.SetScale(0.01f); }
 	currentSelectedMeshWorldTransform.SetPosition(0.0f, 0.0f, 2.0f);
 	currentSelectedMeshWorldTransform.Rotate(0.0f, YRotationAngle, 0.0f);
 	Matrix4f world = currentSelectedMeshWorldTransform.GetMatrix();
@@ -92,6 +95,9 @@ void Renderer::HandleKeyboardEvents(unsigned char key, int mouse_x, int mouse_y)
 			break;
 		case '2':
 			m_CurrentMesh = m_Pyramid;
+			break;
+		case '3':
+			m_CurrentMesh = m_SpiderMesh;
 			break;
 	}
 }

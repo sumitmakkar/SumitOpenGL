@@ -6,6 +6,7 @@
 #include <Meshes\BasicPyramid.h>
 #include <SCamera.h>
 #include <SOGLTextureBase.h>
+#include "Meshes\FileMeshLoader\SFileMeshLoader.h"
 
 class Renderer : public SRendererBase
 {
@@ -15,6 +16,7 @@ class Renderer : public SRendererBase
 		const char*		 m_FSFileName = "Shaders/Shader.fs";
 		BasicCube*		 m_Cube;
 		BasicPyramid*	 m_Pyramid;
+		SFileMeshLoader* m_SpiderMesh;
 		SCamera			 m_GameCamera;
 		PersProjInfo	 m_PersProjInfo;
 		GLuint			 m_gWVPLocation;
