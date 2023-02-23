@@ -59,10 +59,10 @@ void SFileMeshLoader::CountVerticesAndIndices(unsigned int& numVertices, unsigne
 
 void SFileMeshLoader::ReserveSpace(unsigned int numVertices, unsigned int numIndices)
 {
-	m_Vertices = new Vector3f[numVertices];
-	m_Normals  = new Vector3f[numVertices];
-	m_Textures = new Vector2f[numVertices];
-	m_Indices  = new GLuint[numIndices];
+	m_Vertices.reserve(numVertices);
+	m_Normals.reserve(numVertices);
+	m_Textures.reserve(numVertices);
+	m_Indices.reserve(numIndices);
 }
 
 void SFileMeshLoader::InitAllMeshes()
@@ -72,13 +72,13 @@ void SFileMeshLoader::InitAllMeshes()
 	for (unsigned int i = 0; i < m_MeshesData.size(); i++)
 	{
 		const aiMesh* aiMesh = m_Scene->mMeshes[i];
-		InitSingleMesh(currentStartIndex, currentIndicesIndex, aiMesh);
+		InitSingleMesh(currentStartIndex, aiMesh);
 		currentStartIndex   += aiMesh->mNumVertices;
 		currentIndicesIndex += aiMesh->mNumFaces;
 	}
 }
 
-void SFileMeshLoader::InitSingleMesh(uint meshIndex, uint indicesIndex, const aiMesh* aiMesh)
+void SFileMeshLoader::InitSingleMesh(uint meshIndex, const aiMesh* aiMesh)
 {
 	const aiVector3D Zero3D(0.0f, 0.0f, 0.0f);
 
@@ -86,30 +86,30 @@ void SFileMeshLoader::InitSingleMesh(uint meshIndex, uint indicesIndex, const ai
 	for (unsigned int i = 0; i < aiMesh->mNumVertices; i++)
 	{
 		const aiVector3D& pPos = aiMesh->mVertices[i];
-		m_Vertices[meshIndex + i] = Vector3f(pPos.x, pPos.y, pPos.z);
+		m_Vertices.push_back(Vector3f(pPos.x, pPos.y, pPos.z));
 
 		if (aiMesh->mNormals)
 		{
 			const aiVector3D& pNormal = aiMesh->mNormals[i];
-			m_Normals[meshIndex + i] = Vector3f(pNormal.x, pNormal.y, pNormal.z);
+			m_Normals.push_back(Vector3f(pNormal.x, pNormal.y, pNormal.z));
 		}
 		else
 		{
 			aiVector3D Normal(0.0f, 1.0f, 0.0f);
-			m_Normals[meshIndex + i] = Vector3f(Normal.x, Normal.y, Normal.z);
+			m_Normals.push_back(Vector3f(Normal.x, Normal.y, Normal.z));
 		}
 
 		const aiVector3D& pTexCoord = aiMesh->HasTextureCoords(0) ? aiMesh->mTextureCoords[0][i] : Zero3D;
-		m_Textures[meshIndex + i] = Vector2f(pTexCoord.x, pTexCoord.y);
+		m_Textures.push_back(Vector2f(pTexCoord.x, pTexCoord.y));
 	}
 
 	// Populate the index buffer
 	for (unsigned int i = 0; i < aiMesh->mNumFaces; i++)
 	{
 		const aiFace& Face = aiMesh->mFaces[i];
-		m_Indices[indicesIndex + i] = Face.mIndices[0];
-		m_Indices[indicesIndex + i] = Face.mIndices[1];
-		m_Indices[indicesIndex + i] = Face.mIndices[2];
+		m_Indices.push_back(Face.mIndices[0]);
+		m_Indices.push_back(Face.mIndices[1]);
+		m_Indices.push_back(Face.mIndices[2]);
 	}
 }
 

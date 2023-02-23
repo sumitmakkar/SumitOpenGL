@@ -43,7 +43,7 @@ class SFileMeshLoader : public SMeshBase
 		void CountVerticesAndIndices(unsigned int& NumVertices, unsigned int& NumIndices);
 		void ReserveSpace(unsigned int numVertices, unsigned int numIndices);
 		void InitAllMeshes();
-		void InitSingleMesh(uint meshIndex, uint indicesIndex, const aiMesh* aiMesh);
+		void InitSingleMesh(uint meshIndex, const aiMesh* aiMesh);
 		bool InitMaterials(const string& filename);
 		void LoadTextures(const string& directory, const aiMaterial* material, int index);
 		void LoadDiffuseTexture(const string& directory, const aiMaterial* material, int materialIndex);

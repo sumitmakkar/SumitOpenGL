@@ -57,7 +57,7 @@ void Renderer::UpdateCurrentMesh()
 	currentSelectedMeshWorldTransform.Rotate(0.0f, YRotationAngle, 0.0f);
 	Matrix4f world = currentSelectedMeshWorldTransform.GetMatrix();
 
-	Matrix4f view = m_GameCamera.GetMatrix();
+	Matrix4f view  = m_GameCamera.GetMatrix();
 
 	Matrix4f projection;
 	projection.InitPersProjTransform(m_PersProjInfo);
